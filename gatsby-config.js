@@ -3,6 +3,10 @@ module.exports = {
     title: `česko.digital`,
     description: `Skrz jedničky a nuly měníme Česko k lepšímu`,
     author: `@ceskodigital`,
+    ecomail: {
+      listID: '2',
+      accID: '2bb287d15897fe2f9d89c882af9a3a8b',
+    },
   },
   plugins: [
     // Docs: https://www.gatsbyjs.org/packages/gatsby-plugin-react-helmet/
