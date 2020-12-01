@@ -1,7 +1,7 @@
 import { graphql, useStaticQuery } from 'gatsby'
 import React, { useContext } from 'react'
 import { ThemeContext } from 'styled-components'
-import { Button } from '../../buttons'
+import { Button, ButtonSize } from '../../buttons'
 import { Link } from '../../links'
 import Section from '../section'
 import * as S from './styles'
@@ -61,7 +61,9 @@ const Footer: React.FC = () => {
               <S.Links>
                 {Object.values(t.info).map(([name, url], i) => (
                   <div key={i}>
-                    <Link to={url}>{name}</Link>
+                    <Link size={ButtonSize.Small} to={url}>
+                      {name}
+                    </Link>
                   </div>
                 ))}
               </S.Links>
@@ -71,7 +73,12 @@ const Footer: React.FC = () => {
               <S.Links>
                 {Object.values(t.social).map(([name, url], i) => (
                   <div key={i}>
-                    <Link to={url} key={i} target="_blank">
+                    <Link
+                      size={ButtonSize.Small}
+                      to={url}
+                      key={i}
+                      target="_blank"
+                    >
                       {name}
                     </Link>
                   </div>

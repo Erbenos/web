@@ -104,7 +104,7 @@ export const NewsletterForm = styled.form`
 export const NewsletterInput = styled.input`
   width: 100%;
   max-width: 316px;
-  background: ${(props) => rgba(props.theme.colors.white, 0.15)};
+  background: #2d2d50;
   border: 0;
   border-radius: ${(props) => props.theme.borderRadius.base}px;
   padding: ${(props) => props.theme.space.base * 1.5}px
