@@ -117,7 +117,7 @@ export const NewsletterButton = styled.div`
   margin-left: ${(props) => props.theme.space.md * 1.5}px;
 `
 
-export const Heading = styled.h4`
+export const Heading = styled.h2`
   font-size: ${(props) => props.theme.fontSizes.md}px;
   line-height: ${(props) => props.theme.lineHeights.heading};
   margin-bottom: ${(props) => props.theme.space.lg}px;
