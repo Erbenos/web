@@ -1,3 +1,4 @@
+import { Link } from 'components/links/link/styles'
 import rgba from 'polished/lib/color/rgba'
 import styled from 'styled-components'
 
@@ -140,13 +141,29 @@ export const Note = styled.section`
   opacity: 0.5;
 `
 
-export const Links = styled.div`
-  display: flex;
-  flex-direction: column;
-  ${(props) => flexGapPolyfill(props.theme.space.md)}
+export const Navigation = styled.nav``
 
-  > div > * {
+export const Links = styled.ul`
+  display: block;
+
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+
+  > * {
     flex: 0;
+  }
+`
+
+export const LinkItem = styled.li`
+  padding: 0;
+  margin: 0;
+
+  & + & {
+    margin-top: ${(props) => props.theme.space.md}px;
+  }
+
+  > ${Link} {
     color: ${(props) => props.theme.colors.white};
   }
 `
