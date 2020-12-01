@@ -10,6 +10,11 @@ export const defaultTheme: DefaultTheme = {
     md: '52em',
     lg: '64em',
   },
+  animation: {
+    duration: {
+      base: '250ms',
+    },
+  },
   fontSizes: {
     xxxl: 44,
     xxl: 35,

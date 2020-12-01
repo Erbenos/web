@@ -1,5 +1,5 @@
 import { graphql, useStaticQuery } from 'gatsby'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { ThemeContext } from 'styled-components'
 import { Button, ButtonSize } from '../../buttons'
 import { Link } from '../../links'
@@ -8,6 +8,11 @@ import * as S from './styles'
 
 const Footer: React.FC = () => {
   const theme = useContext(ThemeContext)
+  const [email, setEmail] = useState('')
+  const [isInvalid, setInvalid] = useState(false)
+  const [isTouched, setTouched] = useState(false)
+  const emailEl = useRef<HTMLInputElement>(null)
+
   const { listID, accID } = useStaticQuery<{
     site: { siteMetadata: { ecomail: { listID: string; accID: string } } }
   }>(graphql`
@@ -22,6 +27,28 @@ const Footer: React.FC = () => {
       }
     }
   `).site.siteMetadata.ecomail
+
+  useEffect(() => validateForm(), [email, isTouched])
+
+  const validateForm = (): void => {
+    const isInvalid =
+      !emailEl.current?.validity.valid ||
+      (isTouched && email.trim().length === 0)
+    setInvalid(isInvalid)
+  }
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    // has been validated beforehand
+    if (isInvalid) {
+      e.preventDefault()
+      return
+    }
+    // was never touched, force validation rerun, but this time consider empty values invalid
+    if (!isTouched) {
+      setTouched(true)
+      e.preventDefault()
+    }
+  }
 
   const t = {
     headings: {
@@ -46,6 +73,7 @@ const Footer: React.FC = () => {
       note:
         'Chcete vědět, na čem pracujeme? Jednou za měsíc shrneme, co se v komunitě událo a co chystáme.',
       inputPlaceholder: 'Zadejte e-mail',
+      inputErr: 'Zadejte prosím validní e-mailovou adresu.',
       subscribe: 'Odebírat',
     },
     footnote: 'cesko.digital © 2020, Tento web používa cookies ¯\\_(ツ)_/¯',
@@ -94,13 +122,28 @@ const Footer: React.FC = () => {
             <S.Heading>{t.headings.newsletter}</S.Heading>
             <S.NewsletterInfo>{t.newsletter.note}</S.NewsletterInfo>
             <S.NewsletterForm
+              onSubmit={onSubmit}
               action={`https://ceskodigital.ecomailapp.cz/public/subscribe/${listID}/${accID}`}
               method="POST"
             >
-              <S.NewsletterInput
-                name="email"
-                placeholder={t.newsletter.inputPlaceholder}
-              />
+              <S.NewsletterFormControl>
+                <S.NewsletterInput
+                  name="email"
+                  type="email"
+                  value={email}
+                  ref={emailEl}
+                  onChange={(e) => {
+                    setEmail(e.target.value)
+                    setTouched(true)
+                  }}
+                  placeholder={t.newsletter.inputPlaceholder}
+                />
+                <S.NewsletterInputErrMessage
+                  className={isInvalid ? 'is-visible' : ''}
+                >
+                  {t.newsletter.inputErr}
+                </S.NewsletterInputErrMessage>
+              </S.NewsletterFormControl>
               <S.NewsletterButton>
                 <Button>{t.newsletter.subscribe}</Button>
               </S.NewsletterButton>

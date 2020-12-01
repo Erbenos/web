@@ -90,26 +90,47 @@ export const NewsletterForm = styled.form`
   display: flex;
 `
 
-export const NewsletterInput = styled.input`
-  width: 100%;
+export const NewsletterFormControl = styled.div`
+  flex: 1;
   max-width: 316px;
-  background: #2d2d50;
-  border: 0;
+`
+
+export const NewsletterInput = styled.input`
+  --form-control-bg: #2d2d50;
+  --form-control-color: ${(props) => rgba(props.theme.colors.white, 0.8)};
+
+  width: 100%;
+  background: var(--form-control-bg);
+  border-width: 0;
   border-radius: ${(props) => props.theme.borderRadius.base}px;
+  border-color: var(--form-control-bg);
+  box-sizing: border-box;
   padding: ${(props) => props.theme.space.base * 1.5}px
     ${(props) => props.theme.space.base * 2.5}px;
-  color: ${(props) => rgba(props.theme.colors.white, 0.8)};
+  color: var(--form-control-color);
   font-size: ${(props) => props.theme.fontSizes.base}px;
   outline: 0;
   font-family: ${(props) => props.theme.fonts.body};
   line-height: ${(props) => props.theme.lineHeights.body};
+  margin-bottom: ${(props) => props.theme.space.md}px;
 
   ::placeholder,
   ::-webkit-input-placeholder {
-    color: ${(props) => rgba(props.theme.colors.white, 0.8)};
+    color: var(--form-control-color);
   }
   :-ms-input-placeholder {
-    color: ${(props) => rgba(props.theme.colors.white, 0.8)};
+    color: var(--form-control-color);
+  }
+`
+
+export const NewsletterInputErrMessage = styled.output`
+  font-size: ${(props) => props.theme.fontSizes.base}px;
+  color: #ff0000;
+  transition: ${(props) => props.theme.animation.duration.base} opacity;
+  opacity: 0;
+
+  &.is-visible {
+    opacity: 1;
   }
 `
 
