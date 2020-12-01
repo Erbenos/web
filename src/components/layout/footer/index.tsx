@@ -48,7 +48,7 @@ const Footer: React.FC = () => {
       inputPlaceholder: 'Zadejte e-mail',
       subscribe: 'Odebírat',
     },
-    footnote: 'cesko.digital © 2020, Tento web používa cookies ¯_(ツ)_/¯',
+    footnote: 'cesko.digital © 2020, Tento web používa cookies ¯\\_(ツ)_/¯',
   }
 
   return (
