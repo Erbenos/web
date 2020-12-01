@@ -2,21 +2,6 @@ import { Link } from 'components/links/link/styles'
 import rgba from 'polished/lib/color/rgba'
 import styled from 'styled-components'
 
-// based on https://github.com/limitlessloop/flex-gap-polyfill
-const flexGapPolyfill = (gap: number): string => `
-  --fgp-gap-container: calc(var(--fgp-gap-parent, 0px) - ${gap}px) !important;
-  --fgp-gap: var(--fgp-gap-container);
-  margin-top: var(--fgp-gap);
-  margin-right: var(--fgp-gap);
-  > * {
-    --fgp-gap-parent: ${gap}px !important;
-    --fgp-gap-item: ${gap}px !important;
-    --fgp-gap: var(--fgp-gap-item) !important;
-    margin-top: var(--fgp-gap);
-    margin-right: var(--fgp-gap);
-  }
-`
-
 export const Outer = styled.div`
   margin: 0 auto;
   padding: ${(props) => props.theme.space.xl}px
@@ -63,17 +48,20 @@ export const Container = styled.section`
 
 export const Info = styled.section`
   grid-area: info;
-
   display: flex;
-  ${(props) => flexGapPolyfill(props.theme.space.lg)}
-  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-    flex-direction: column;
-    ${(props) => flexGapPolyfill(props.theme.space.md)}
-  }
 `
 
 export const InfoBlock = styled.div`
   flex: 1;
+  
+  & + & {
+    margin-left: ${(props) => props.theme.space.lg}px;
+  }
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+    & + & {
+      margin-left: ${(props) => props.theme.space.md})px;
+    }
+  }
 `
 
 export const Newsletter = styled.section`
