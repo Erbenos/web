@@ -138,15 +138,13 @@ const Footer: React.FC = () => {
                   }}
                   placeholder={t.newsletter.inputPlaceholder}
                 />
-                <S.NewsletterInputErrMessage
-                  className={isInvalid ? 'is-visible' : ''}
-                >
-                  {t.newsletter.inputErr}
-                </S.NewsletterInputErrMessage>
               </S.NewsletterFormControl>
-              <S.NewsletterButton>
-                <Button>{t.newsletter.subscribe}</Button>
-              </S.NewsletterButton>
+              <S.NewsletterButton>{t.newsletter.subscribe}</S.NewsletterButton>
+              <S.NewsletterInputErrMessage
+                className={isInvalid ? 'is-visible' : ''}
+              >
+                {t.newsletter.inputErr}
+              </S.NewsletterInputErrMessage>
             </S.NewsletterForm>
           </S.Newsletter>
           <S.Note>{t.footnote}</S.Note>
