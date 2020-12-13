@@ -2,6 +2,12 @@ import { Link } from 'components/links/link/styles'
 import rgba from 'polished/lib/color/rgba'
 import styled from 'styled-components'
 
+export const Wrapper = styled.footer`
+  flex: 1;
+  overflow: auto;
+  background-color: ${(props) => props.theme.colors.darkGrey};
+`
+
 export const Outer = styled.div`
   margin: 0 auto;
   padding: ${(props) => props.theme.space.xl}px

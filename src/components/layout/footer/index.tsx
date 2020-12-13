@@ -80,7 +80,7 @@ const Footer: React.FC = () => {
   }
 
   return (
-    <Section as={'footer'} backgroundColor={theme.colors.darkGrey}>
+    <S.Wrapper>
       <S.Outer>
         <S.Container>
           <S.Info>
@@ -152,7 +152,7 @@ const Footer: React.FC = () => {
           <S.Note>{t.footnote}</S.Note>
         </S.Container>
       </S.Outer>
-    </Section>
+    </S.Wrapper>
   )
 }
 
