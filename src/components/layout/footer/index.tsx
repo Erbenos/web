@@ -1,16 +1,14 @@
 import { graphql, useStaticQuery } from 'gatsby'
-import React, { useContext, useEffect, useRef, useState } from 'react'
-import { ThemeContext } from 'styled-components'
-import { Button, ButtonSize } from '../../buttons'
+import useForm, { ValidationErrors } from 'hooks/useForm'
+import React, { useRef } from 'react'
+import { ButtonSize } from '../../buttons'
 import { Link } from '../../links'
-import Section from '../section'
 import * as S from './styles'
 
 const Footer: React.FC = () => {
-  const theme = useContext(ThemeContext)
-  const [email, setEmail] = useState('')
-  const [isInvalid, setInvalid] = useState(false)
-  const [isTouched, setTouched] = useState(false)
+  const { values, errors, handleSubmit, handleChange } = useForm<{
+    email: string
+  }>({ email: '' }, onSuccess, validate)
   const emailEl = useRef<HTMLInputElement>(null)
 
   const { listID, accID } = useStaticQuery<{
@@ -27,28 +25,6 @@ const Footer: React.FC = () => {
       }
     }
   `).site.siteMetadata.ecomail
-
-  useEffect(() => validateForm(), [email, isTouched])
-
-  const validateForm = (): void => {
-    const isInvalid =
-      !emailEl.current?.validity.valid ||
-      (isTouched && email.trim().length === 0)
-    setInvalid(isInvalid)
-  }
-
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
-    // has been validated beforehand
-    if (isInvalid) {
-      e.preventDefault()
-      return
-    }
-    // was never touched, force validation rerun, but this time consider empty values invalid
-    if (!isTouched) {
-      setTouched(true)
-      e.preventDefault()
-    }
-  }
 
   const t = {
     headings: {
@@ -77,6 +53,19 @@ const Footer: React.FC = () => {
       subscribe: 'Odebírat',
     },
     footnote: 'cesko.digital © 2020, Tento web používa cookies ¯\\_(ツ)_/¯',
+  }
+
+  function onSuccess(): void {
+    alert('on success')
+  }
+
+  function validate(): ValidationErrors<typeof values> {
+    const errors =
+      emailEl.current?.validity.valid &&
+      emailEl.current?.value.trim().length !== 0
+        ? null
+        : { email: t.newsletter.inputErr }
+    return errors
   }
 
   return (
@@ -122,26 +111,24 @@ const Footer: React.FC = () => {
             <S.Heading>{t.headings.newsletter}</S.Heading>
             <S.NewsletterInfo>{t.newsletter.note}</S.NewsletterInfo>
             <S.NewsletterForm
-              onSubmit={onSubmit}
+              onSubmit={handleSubmit}
               action={`https://ceskodigital.ecomailapp.cz/public/subscribe/${listID}/${accID}`}
               method="POST"
+              noValidate
             >
               <S.NewsletterFormControl>
                 <S.NewsletterInput
                   name="email"
                   type="email"
-                  value={email}
+                  value={values.email || ''}
                   ref={emailEl}
-                  onChange={(e) => {
-                    setEmail(e.target.value)
-                    setTouched(true)
-                  }}
+                  onChange={handleChange}
                   placeholder={t.newsletter.inputPlaceholder}
                 />
               </S.NewsletterFormControl>
               <S.NewsletterButton>{t.newsletter.subscribe}</S.NewsletterButton>
               <S.NewsletterInputErrMessage
-                className={isInvalid ? 'is-visible' : ''}
+                className={errors?.email ? 'is-visible' : ''}
               >
                 {t.newsletter.inputErr}
               </S.NewsletterInputErrMessage>
