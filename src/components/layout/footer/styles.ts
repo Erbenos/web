@@ -2,6 +2,9 @@ import Button from 'components/buttons/button'
 import { Link } from 'components/links/link/styles'
 import rgba from 'polished/lib/color/rgba'
 import styled from 'styled-components'
+import czechiaMapArrows from '@static/assets/czechia-map-arrows.png'
+import czechiaMapArrows2x from '@static/assets/czechia-map-arrows@2x.png'
+import footerMail from '@static/assets/footer-mail.svg'
 
 export const Wrapper = styled.footer`
   display: flex;
@@ -34,13 +37,15 @@ export const Container = styled.section`
   color: ${(props) => props.theme.colors.white};
   padding-bottom: ${(props) => props.theme.space.lg}px;
 
-  background-image: url('assets/czechia-map-arrows.png');
+  background-image: url('${czechiaMapArrows}');
   background-repeat: no-repeat;
-  background-position: left ${(props) => props.theme.space.md}px bottom -${(props) => props.theme.space.lg}px;
+  background-position: left ${(props) => props.theme.space.md}px bottom -${(
+  props
+) => props.theme.space.lg}px;
   background-size: 608px 336px;
 
   @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-    background-image: url('assets/czechia-map-arrows@2x.png');
+    background-image: url('${czechiaMapArrows2x}');
   }
 
   display: grid;
@@ -55,7 +60,10 @@ export const Container = styled.section`
     padding: ${(props) => props.theme.space.md * 1.5}px;
     max-width: 100%;
 
-    background-position: bottom ${(props) => props.theme.space.xl}px right -${(props) => props.theme.space.xl}px;
+    background-position: bottom 
+      ${(props) => props.theme.space.xl}px
+      right
+      -${(props) => props.theme.space.xl}px;
 
     grid-template-rows: auto;
     grid-template-columns: auto;
@@ -101,13 +109,13 @@ export const InfoBlock = styled.div`
 export const Newsletter = styled.section`
   grid-area: newsletter;
 
-  background-image: url('assets/footer-mail.svg');
+  background-image: url('${footerMail}');
   background-position: top right;
   background-repeat: no-repeat;
 
   @media (min-width: ${(props) =>
-      props.theme.breakpoints.md}) and (max-width: ${(props) =>
-      props.theme.breakpoints.lg}) {
+    props.theme.breakpoints.md}) and (max-width: ${(props) =>
+  props.theme.breakpoints.lg}) {
     background-image: none;
   }
 `
