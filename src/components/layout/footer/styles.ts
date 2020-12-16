@@ -2,9 +2,9 @@ import Button from 'components/buttons/button'
 import { Link } from 'components/links/link/styles'
 import rgba from 'polished/lib/color/rgba'
 import styled from 'styled-components'
-import czechiaMapArrows from '@static/assets/czechia-map-arrows.png'
-import czechiaMapArrows2x from '@static/assets/czechia-map-arrows@2x.png'
-import footerMail from '@static/assets/footer-mail.svg'
+import czechiaMapArrows from 'images/czechia-map-arrows.png'
+import czechiaMapArrows2x from 'images/czechia-map-arrows@2x.png'
+import footerMail from 'images/footer-mail.svg'
 
 export const Wrapper = styled.footer`
   display: flex;
