@@ -1,10 +1,7 @@
-import Button from 'components/buttons/button'
 import { Link } from 'components/links/link/styles'
-import rgba from 'polished/lib/color/rgba'
 import styled from 'styled-components'
 import czechiaMapArrows from 'images/czechia-map-arrows.png'
 import czechiaMapArrows2x from 'images/czechia-map-arrows@2x.png'
-import footerMail from 'images/footer-mail.svg'
 
 export const Wrapper = styled.footer`
   display: flex;
@@ -104,92 +101,6 @@ export const InfoBlock = styled.div`
       flex: 1;
     }
   }
-`
-
-export const Newsletter = styled.section`
-  grid-area: newsletter;
-
-  background-image: url('${footerMail}');
-  background-position: top right;
-  background-repeat: no-repeat;
-
-  @media (min-width: ${(props) =>
-    props.theme.breakpoints.md}) and (max-width: ${(props) =>
-  props.theme.breakpoints.lg}) {
-    background-image: none;
-  }
-`
-
-export const NewsletterInfo = styled.strong`
-  max-width: 480px;
-  display: inline-block;
-  font-size: ${(props) => props.theme.fontSizes.xl}px;
-  line-height: ${(props) => props.theme.lineHeights.heading};
-  margin-bottom: ${(props) => props.theme.space.lg}px;
-`
-
-export const NewsletterForm = styled.form`
-  display: grid;
-  grid-template-areas: 'input button' 'message message';
-  grid-template-rows: auto auto;
-  grid-template-columns: 316px auto;
-  grid-gap: ${(props) => props.theme.space.md}px
-    ${(props) => props.theme.space.md * 1.5}px;
-
-  @media (max-width: ${(props) => props.theme.breakpoints.lg}) {
-    grid-template-areas: 'input' 'button' 'message';
-    grid-template-rows: auto;
-    grid-template-columns: min(316px, 100%);
-  }
-`
-
-export const NewsletterFormControl = styled.div`
-  flex: 1;
-  grid-area: input;
-`
-
-export const NewsletterInput = styled.input`
-  --form-control-bg: #2d2d50;
-  --form-control-color: ${(props) => rgba(props.theme.colors.white, 0.8)};
-
-  width: 100%;
-  background: var(--form-control-bg);
-  border-width: 0;
-  border-radius: ${(props) => props.theme.borderRadius.base}px;
-  border-color: var(--form-control-bg);
-  box-sizing: border-box;
-  padding: ${(props) => props.theme.space.base * 1.5}px
-    ${(props) => props.theme.space.base * 2.5}px;
-  color: var(--form-control-color);
-  font-size: ${(props) => props.theme.fontSizes.base}px;
-  outline: 0;
-  font-family: ${(props) => props.theme.fonts.body};
-  line-height: ${(props) => props.theme.lineHeights.body};
-
-  ::placeholder,
-  ::-webkit-input-placeholder {
-    color: var(--form-control-color);
-  }
-  :-ms-input-placeholder {
-    color: var(--form-control-color);
-  }
-`
-
-export const NewsletterInputErrMessage = styled.output`
-  grid-area: message;
-  font-size: ${(props) => props.theme.fontSizes.base}px;
-  color: #ff0000;
-  transition: ${(props) => props.theme.animation.duration.base} opacity;
-  opacity: 0;
-
-  &.is-visible {
-    opacity: 1;
-  }
-`
-
-export const NewsletterButton = styled(Button)`
-  grid-area: button;
-  justify-content: center;
 `
 
 export const Heading = styled.h2`
